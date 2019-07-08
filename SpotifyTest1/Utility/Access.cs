@@ -77,23 +77,6 @@ namespace SpotifyTest1
             }
         }
 
-
-       /* public async Task<Task> OpenSpotify()
-        {
-            Process[] lst = Process.GetProcesses();
-            
-            foreach (Process p in lst)
-            {
-                if (p.ProcessName.ToLower() == "spotify.exe")
-                    MessageBox.Show("Attivo");
-                else
-                {
-                    Process.Start("Spotify.exe");
-                    break;
-                }
-            }
-            return Task.CompletedTask;
-        }*/
     }
 
 }

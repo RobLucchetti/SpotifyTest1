@@ -35,7 +35,7 @@ namespace SpotifyTest1
             access = new Access();
             try
             { 
-                mongo = new MongoDBClass("LyricsfyTest");
+                mongo = new MongoDBClass("Lyricsfy");
                 //istanzio la classe che gestisce le api id spotify
                 access.auth.AuthReceived += async (senders, payload) =>
                 {
@@ -66,7 +66,7 @@ namespace SpotifyTest1
         {
             try
             {
-                mongo.InsertRecord("Artist", new ArtistModel()
+                mongo.InsertRecord("Artists", new ArtistModel()
                 {
                     ArtistName = access.artist.Name,
                     Albums = new List<AlbumModel>()
@@ -94,12 +94,12 @@ namespace SpotifyTest1
         }
         private string TrovaArtista()
         {
-            IMongoCollection<ArtistModel> collection = mongo.Db.GetCollection<ArtistModel>("Artist"); 
+            IMongoCollection<ArtistModel> collection = mongo.Db.GetCollection<ArtistModel>("Artists"); 
             ArtistModel artistcollection = null;
 
             try
             {
-                artistcollection = mongo.LoadRecordByName<ArtistModel>("Artist", "ArtistName", access.artist.Name);
+                artistcollection = mongo.LoadRecordByName<ArtistModel>("Artists", "ArtistName", access.artist.Name);
                 
                 if (artistcollection != null)
                 {
@@ -146,7 +146,8 @@ namespace SpotifyTest1
             while (i < artistcollection.Albums.Count)
             {
                 if (artistcollection.Albums[i].AlbumName == access.album.Name)
-                {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  MessageBox.Show("Album Trovato : " + artistcollection.Albums[i].AlbumName);
+                {
+                    MessageBox.Show("Album Trovato : " + artistcollection.Albums[i].AlbumName);
                     AlbumPos = i;
                     albumpos = i;
                     break;
@@ -191,7 +192,7 @@ namespace SpotifyTest1
 
                 ReplaceOneResult ReplaceResult = collection.ReplaceOne(ArtistFilter, artistcollection, new UpdateOptions { IsUpsert = true });
                 //Achtung();
-                MessageBox.Show("Traccia Aggiunta");
+                //MessageBox.Show("Traccia Aggiunta");
 
             }
             else
@@ -288,7 +289,7 @@ namespace SpotifyTest1
                 Lyrics.Text = "";
             });
 
-            ArtistModel artistcollection = mongo.LoadRecordByName<ArtistModel>("Artist", "ArtistName", access.artist.Name);
+            ArtistModel artistcollection = mongo.LoadRecordByName<ArtistModel>("Artists", "ArtistName", access.artist.Name);
             FilterDefinition<ArtistModel> ArtistFilter = Builders<ArtistModel>.Filter.Eq("ArtistName", access.artist.Name);
             IMongoCollection<ArtistModel> collection = mongo.Db.GetCollection<ArtistModel>("Artist");
 
