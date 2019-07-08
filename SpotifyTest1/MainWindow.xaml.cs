@@ -47,9 +47,8 @@ namespace SpotifyTest1
                     await InitInterface();
 
                     //Una volta scaricate Inizializzo gli elementi grafici
-                    lyrics = TrovaArtista();
+                    //lyrics = TrovaArtista();
 
-                    //lyrics = TrovaArtista(mongo, access
                     //Aggiorna l'interfaccia e fa richieste a spotify
                     UpdateEvent();
                 };
@@ -84,7 +83,7 @@ namespace SpotifyTest1
                         }
                     }
                 });
-                MessageBox.Show("Artista Inserito");
+                //MessageBox.Show("Artista Inserito");
                 Achtung();
             }
             catch (MongoException e)
@@ -117,7 +116,6 @@ namespace SpotifyTest1
             }
             catch (InvalidOperationException e)
             {
-                //InserisciArtista();
                 MessageBox.Show("Error : " + e.Message);
             }
             return null;
@@ -147,7 +145,7 @@ namespace SpotifyTest1
             {
                 if (artistcollection.Albums[i].AlbumName == access.album.Name)
                 {
-                    MessageBox.Show("Album Trovato : " + artistcollection.Albums[i].AlbumName);
+                    //MessageBox.Show("Album Trovato : " + artistcollection.Albums[i].AlbumName);
                     AlbumPos = i;
                     albumpos = i;
                     break;
@@ -157,8 +155,8 @@ namespace SpotifyTest1
             if (AlbumPos == -1)
             {
                 UpdateResult updateResult = collection.UpdateOne(ArtistFilter, UpdateAlbum, new UpdateOptions { IsUpsert = true });
+                //MessageBox.Show("Album Inserito");
                 Achtung();
-                MessageBox.Show("Album Inserito");
             }
             else
             {
@@ -191,7 +189,7 @@ namespace SpotifyTest1
                 artistcollection.Albums[albumPos].Tracks.Add(new TrackModel { TrackName = access.Track.Name, Lyrics = null });
 
                 ReplaceOneResult ReplaceResult = collection.ReplaceOne(ArtistFilter, artistcollection, new UpdateOptions { IsUpsert = true });
-                //Achtung();
+                Achtung();
                 //MessageBox.Show("Traccia Aggiunta");
 
             }
@@ -220,8 +218,7 @@ namespace SpotifyTest1
                       //Se e' cambiato artista, album o canzone
                       if (access.Update())
                       {
-                          //TrovaArtista(mongo, access);
-                          //ristampo l'interfaccia con tutti i dati
+                          //stampo l'interfaccia con tutti i dati
                           await InitInterface();
 
                       }
@@ -291,7 +288,7 @@ namespace SpotifyTest1
 
             ArtistModel artistcollection = mongo.LoadRecordByName<ArtistModel>("Artists", "ArtistName", access.artist.Name);
             FilterDefinition<ArtistModel> ArtistFilter = Builders<ArtistModel>.Filter.Eq("ArtistName", access.artist.Name);
-            IMongoCollection<ArtistModel> collection = mongo.Db.GetCollection<ArtistModel>("Artist");
+            IMongoCollection<ArtistModel> collection = mongo.Db.GetCollection<ArtistModel>("Artists");
 
             if (artistcollection.Albums[albumpos].Tracks[trackpos].Lyrics == null)
             {

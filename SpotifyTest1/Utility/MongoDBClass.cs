@@ -19,9 +19,7 @@ namespace SpotifyTest1
         {
             client = new MongoClient();
             Db = client.GetDatabase(database);
-
         }
-
 
         public void InsertRecord<T>(string Table, T Record)
         {

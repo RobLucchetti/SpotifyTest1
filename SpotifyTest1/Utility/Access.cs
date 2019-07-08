@@ -61,9 +61,7 @@ namespace SpotifyTest1
             return Task.CompletedTask;
         }
         public void Assign()
-        {
-            // Artistmodel = new ArtistModel();
-            
+        {                     
             this.artist = this.context.Item.Artists.First();
             this.album = this.api.GetAlbum(this.context.Item.Album.Id);
             this.Track = this.context.Item;
