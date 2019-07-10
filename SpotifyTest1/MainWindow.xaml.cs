@@ -44,10 +44,9 @@ namespace SpotifyTest1
 
                     //Scarico le informazioni da spotify
                     await access.Init();
+                    //Una volta scaricate Inizializzo gli elementi grafici
                     await InitInterface();
 
-                    //Una volta scaricate Inizializzo gli elementi grafici
-                    //lyrics = TrovaArtista();
 
                     //Aggiorna l'interfaccia e fa richieste a spotify
                     UpdateEvent();

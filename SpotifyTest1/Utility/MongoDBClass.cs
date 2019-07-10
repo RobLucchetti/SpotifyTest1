@@ -17,7 +17,7 @@ namespace SpotifyTest1
 
         public MongoDBClass(string database)
         {
-            client = new MongoClient();
+            client = new MongoClient("mongodb://localhost:27017,localhost:27027,localhost:27037/admin?replicaSet=Lyricsfy");
             Db = client.GetDatabase(database);
         }
 
